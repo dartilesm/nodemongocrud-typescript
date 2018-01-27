@@ -57,13 +57,19 @@ export function updatePost(req, res, next) {
     Posts.findByIdAndUpdate(id, req.body, (err, post) => {
         if(err){
             res.status(500).json({err})
+        } else {
+            Posts.findById(id, (err, post) => {
+                if (err) {
+                    res.status(500).json({ err })
+                }
+                res.status(200).json({ post }) 
+            })
         }
-        res.status(200).json()
     })
 }
 
 export function deletePost(req, res, next) {
-    const id = req.body.id
+    const id = req.params.id
     
     Posts.findByIdAndRemove(id, req.body, (err, post) => {
         if(err){

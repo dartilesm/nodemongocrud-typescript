@@ -53,19 +53,19 @@ function updatePost(req, res, next) {
         if (err) {
             res.status(500).json({ err: err });
         }
-        res.status(200).json(Posts_1.default.findById(id, function (err, post) {
-            if (err) {
-                {
-                    err;
+        else {
+            Posts_1.default.findById(id, function (err, post) {
+                if (err) {
+                    res.status(500).json({ err: err });
                 }
-            }
-            return { post: post };
-        }));
+                res.status(200).json({ post: post });
+            });
+        }
     });
 }
 exports.updatePost = updatePost;
 function deletePost(req, res, next) {
-    var id = req.body.id;
+    var id = req.params.id;
     Posts_1.default.findByIdAndRemove(id, req.body, function (err, post) {
         if (err) {
             res.status(500).json({ err: err });
