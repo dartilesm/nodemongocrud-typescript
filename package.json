@@ -5,6 +5,7 @@
     "license": "MIT",
     "scripts": {
         "build": "tsc",
+        "server": "tsc && nodemon ./build/server.js",
         "start": "nodemon ./build/server.js"
     },
     "dependencies": {
